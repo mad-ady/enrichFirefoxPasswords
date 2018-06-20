@@ -4,6 +4,8 @@ use warnings;
 use Text::CSV;
 my $csv=Text::CSV->new({ sep_char => ",", quote_char => "\"" });
 
+my $group = "Imported from Firefox";
+
 open FILE, $ARGV[0] or die "$!";
 
 while(<FILE>){
@@ -21,11 +23,11 @@ while(<FILE>){
         else{
             $title=$url
         };
-        if($csv->combine($title,$url,$user,$pass)){
+        if($csv->combine($title,$url,$user,$pass,$group)){
                 print $csv->string(), "\n";
         }
         else{
-                print "\"$title\",\"$url\",\"$user\",\"$pass\"\n";
+                print "\"$title\",\"$url\",\"$user\",\"$pass\",\"$group\"\n";
         }
     }
 }
